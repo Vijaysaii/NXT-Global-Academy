@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NXT Global Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16233A; --paper:#F6F5F1; --slate:#5B6B7D; --brass:#9C7A3C;
+  --rust:#8C3F30; --line:#D9D6CC; --paper-raised:#EFEDE6; --green:#4C7A5A;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:'IBM Plex Sans',sans-serif; line-height:1.5;}
+h1,h2,h3{font-family:'Source Serif 4',serif; margin:0; color:var(--ink);}
+a{color:inherit;}
+input,select,textarea{font-family:inherit; font-size:0.94rem;}
+button{font-family:inherit; cursor:pointer;}
+.hidden{display:none !important;}
+.wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+
+/* DEMO BANNER */
+.demo-banner{
+  background:var(--ink); color:var(--paper); font-size:0.82rem;
+  padding:9px 0; text-align:center;
+}
+.demo-banner select{background:transparent; color:var(--paper); border:1px solid rgba(255,255,255,0.4); padding:3px 8px; border-radius:3px; margin-left:8px;}
+
+/* NAV */
+header.site{border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--paper); z-index:10;}
+nav.wrap{display:flex; align-items:center; justify-content:space-between; height:74px;}
+.brand{font-family:'Source Serif 4',serif; font-weight:600; font-size:1.12rem;}
+.navlinks{display:flex; gap:30px;}
+.navlinks a{font-size:0.92rem; text-decoration:none; border-bottom:1px solid transparent;}
+.navlinks a:hover{border-bottom-color:var(--ink);}
+.btn{display:inline-block; font-size:0.89rem; font-weight:500; padding:10px 20px; border-radius:2px; border:1px solid var(--ink); background:var(--ink); color:var(--paper); text-decoration:none;}
+.btn:hover{background:#22344f;}
+.btn-outline{background:transparent; color:var(--ink);}
+.btn-outline:hover{background:var(--paper-raised);}
+.btn-sm{padding:7px 14px; font-size:0.82rem;}
+.btn-danger{border-color:var(--rust); background:var(--rust); color:#fff;}
+.btn-danger:hover{background:#742f24;}
+
+/* LANDING */
+.hero{padding:78px 0 90px;}
+.hero .wrap{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;}
+.hero h1{font-size:2.6rem; line-height:1.18; max-width:16.5ch;}
+.hero p.lede{margin-top:20px; max-width:46ch; font-size:1.06rem; color:var(--slate);}
+.hero .actions{margin-top:30px; display:flex; gap:16px; flex-wrap:wrap;}
+.stat-row{margin-top:38px; display:flex; gap:32px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:20px;}
+.stat-row div{font-size:0.86rem; color:var(--slate);}
+.stat-row strong{display:block; font-family:'Source Serif 4',serif; font-size:1.25rem; color:var(--ink);}
+.contour-fig{width:100%; height:auto;}
+section{padding:70px 0;}
+.section-head{max-width:56ch; margin-bottom:36px;}
+.section-head h2{font-size:1.75rem; line-height:1.25;}
+.section-head p{color:var(--slate); margin-top:12px;}
+.topic-list{border-top:1px solid var(--line);}
+.topic-row{display:grid; grid-template-columns:1.4fr 2fr; gap:28px; padding:22px 0; border-bottom:1px solid var(--line);}
+.topic-row h3{font-size:1.02rem;}
+.topic-row p{margin:0; color:var(--slate); font-size:0.95rem;}
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:32px;}
+.step{border-top:2px solid var(--ink); padding-top:16px;}
+.step .num{font-family:'Source Serif 4',serif; font-size:1.5rem; color:var(--brass);}
+.step h3{font-size:1rem; margin-top:6px;}
+.step p{color:var(--slate); font-size:0.92rem; margin-top:6px;}
+footer.site{padding:32px 0; border-top:1px solid var(--line); font-size:0.84rem; color:var(--slate);}
+footer.site .wrap{display:flex; justify-content:space-between;}
+
+/* FORMS */
+.form-page{padding:60px 0 100px;}
+.form-card{max-width:560px; margin:0 auto; border:1px solid var(--line); background:#fff; padding:40px;}
+.form-card h2{font-size:1.4rem;}
+.form-card p.sub{color:var(--slate); font-size:0.92rem; margin-top:8px; margin-bottom:28px;}
+.field{margin-bottom:18px;}
+.field label{display:block; font-size:0.85rem; font-weight:500; margin-bottom:6px;}
+.field input, .field select{width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:2px; background:var(--paper);}
+.field input:focus, .field select:focus{outline:2px solid var(--brass); outline-offset:1px; border-color:var(--brass);}
+.field-hint{font-size:0.78rem; color:var(--slate); margin-top:5px;}
+.two-col{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.upload-box{border:1px dashed var(--line); padding:18px; text-align:center; border-radius:2px; background:var(--paper-raised); font-size:0.88rem; color:var(--slate);}
+.upload-box input{margin-top:10px;}
+.form-msg{font-size:0.85rem; padding:10px 14px; border-radius:2px; margin-bottom:18px;}
+.form-msg.error{background:#F6E7E4; color:var(--rust); border:1px solid #E3C3BB;}
+.confirm-box{max-width:560px; margin:60px auto; text-align:center; border:1px solid var(--line); background:#fff; padding:48px 40px;}
+.confirm-box .badge{display:inline-block; padding:6px 14px; border-radius:20px; border:1px solid var(--brass); color:var(--brass); font-size:0.8rem; margin-bottom:18px;}
+
+/* DASHBOARDS */
+.layout{display:grid; grid-template-columns:236px 1fr; min-height:80vh;}
+.sidebar{border-right:1px solid var(--line); padding:26px 20px; display:flex; flex-direction:column;}
+.sidebar .brand{margin-bottom:34px;}
+.navlist{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px;}
+.navlist button.navbtn{display:flex; align-items:center; gap:10px; width:100%; text-align:left; padding:10px 12px; border-radius:3px; font-size:0.9rem; color:var(--slate); background:none; border:none;}
+.navlist button.navbtn:hover{background:var(--paper-raised); color:var(--ink);}
+.navlist button.navbtn.active{background:var(--ink); color:var(--paper);}
+main.dash{padding:36px 44px;}
+.topbar{display:flex; align-items:center; justify-content:space-between; margin-bottom:32px;}
+.greeting h1{font-size:1.5rem; font-weight:500;}
+.greeting p{margin-top:5px; color:var(--slate); font-size:0.92rem;}
+.status-pill{font-size:0.76rem; padding:5px 11px; border:1px solid var(--green); color:var(--green); border-radius:20px;}
+.block{margin-bottom:38px;}
+.block-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px;}
+.block-head h2{font-size:1.12rem;}
+.block-head span{font-size:0.83rem; color:var(--slate);}
+.course-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px;}
+.course-card{border:1px solid var(--line); background:#fff;}
+.course-cover{height:90px; background:var(--ink); display:flex; align-items:flex-end; padding:12px 16px;}
+.course-cover span{color:var(--paper); font-size:0.76rem;}
+.course-body{padding:16px 18px 18px;}
+.course-body h3{font-size:1rem;}
+.course-body .tag{font-size:0.76rem; color:var(--brass);}
+.resource-list{border-top:1px solid var(--line);}
+.resource-row{display:flex; align-items:center; justify-content:space-between; padding:14px 4px; border-bottom:1px solid var(--line); gap:12px;}
+.resource-title{font-size:0.92rem; font-weight:500;}
+.resource-meta{font-size:0.78rem; color:var(--slate); margin-top:2px;}
+.view-badge{font-size:0.74rem; color:var(--slate); border:1px solid var(--line); padding:5px 11px; border-radius:20px; flex:0 0 auto;}
+table.admin-table{width:100%; border-collapse:collapse; font-size:0.9rem;}
+table.admin-table th{text-align:left; font-size:0.78rem; color:var(--slate); font-weight:500; padding:8px 10px; border-bottom:1px solid var(--line);}
+table.admin-table td{padding:12px 10px; border-bottom:1px solid var(--line); vertical-align:middle;}
+.pill{font-size:0.75rem; padding:4px 10px; border-radius:20px;}
+.pill.pending{background:#F3EAD9; color:var(--brass);}
+.pill.approved{background:#E4EEE8; color:var(--green);}
+.pill.rejected{background:#F6E7E4; color:var(--rust);}
+.inline-form{display:flex; gap:10px; flex-wrap:wrap; align-items:end; margin-bottom:22px; background:var(--paper-raised); padding:16px; border:1px solid var(--line);}
+.inline-form .field{margin-bottom:0; min-width:160px; flex:1;}
+.viewer-modal{position:fixed; inset:0; background:rgba(22,35,58,0.75); display:flex; align-items:center; justify-content:center; z-index:50;}
+.viewer-box{background:var(--ink); color:var(--paper); width:min(720px,90vw); padding:0; position:relative;}
+.viewer-box .vh{display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border-bottom:1px solid rgba(255,255,255,0.15);}
+.viewer-box .vbody{padding:32px; text-align:center;}
+.viewer-box .vbody .icon{font-size:2.4rem;}
+.viewer-box .vbody p{color:#C9D0DA; font-size:0.88rem; margin-top:10px;}
+.close-x{background:none; border:none; color:var(--paper); font-size:1.1rem;}
+
+@media(max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;}
+  .navlinks{display:none;}
+  .layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .two-col{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body oncontextmenu="return !document.body.classList.contains('no-copy')">
+
+<div class="demo-banner">
+  This is an interactive prototype — no live backend, data resets on refresh.
+  Viewing as:
+  <select id="roleSwitcher" onchange="handleRoleSwitch(this.value)">
+    <option value="visitor">Visitor</option>
+    <option value="student">Approved Student (demo)</option>
+    <option value="admin">Admin (demo)</option>
+  </select>
+</div>
+
+<div id="app"></div>
+
+<script>
+/* ---------------- STATE (in-memory only) ---------------- */
+let state = {
+  view: 'landing',
+  currentStudentId: 's1',
+  requests: [
+    {id:'r1', name:'Kavya Menon', dob:'1999-04-12', phone:'9876543210', email:'kavya.menon@example.com', username:'kavya_m', aadhaarFile:'aadhaar_kavya.pdf', status:'pending'}
+  ],
+  students: [
+    {id:'s1', name:'Devabhakthuni R.', email:'deva@example.com', username:'deva_r', courseIds:['c1']}
+  ],
+  courses: [
+    {id:'c1', title:'Peril Modelling Fundamentals', materials:[
+      {type:'video', title:'Session 1 — Hazard, Exposure, Vulnerability', meta:'Recording · 58 min'},
+      {type:'pdf', title:'Lecture notes — Module 1', meta:'PDF · 14 pages'}
+    ]}
+  ],
+  adminView: 'requests',
+  studentView: 'dashboard',
+  viewerOpen: null,
+  formError: ''
+};
+
+function render(){ document.getElementById('app').innerHTML = renderView(); }
+
+/* ---------------- ROLE SWITCH (demo only) ---------------- */
+function handleRoleSwitch(role){
+  if(role==='visitor') state.view='landing';
+  if(role==='student') state.view='studentDashboard';
+  if(role==='admin') state.view='adminDashboard';
+  render();
+}
+
+/* ---------------- ROUTING HELPERS ---------------- */
+function go(view){ state.view = view; state.formError=''; render(); window.scrollTo(0,0); }
+
+/* ---------------- REGISTRATION ---------------- */
+function submitRegistration(e){
+  e.preventDefault();
+  const f = e.target;
+  const name = f.name.value.trim();
+  const dob = f.dob.value;
+  const phone = f.phone.value.trim();
+  const email = f.email.value.trim();
+  const username = f.username.value.trim();
+  const password = f.password.value;
+  const fileInput = f.aadhaar;
+  if(!name || !dob || !phone || !email || !username || !password){
+    state.formError = 'Please fill in every field before submitting.';
+    render(); return;
+  }
+  const fileName = fileInput.files.length ? fileInput.files[0].name : 'No file selected';
+  state.requests.push({
+    id:'r'+Date.now(), name, dob, phone, email, username, aadhaarFile:fileName, status:'pending'
+  });
+  go('confirmation');
+}
+
+/* ---------------- ADMIN ACTIONS ---------------- */
+function approveRequest(id){
+  const idx = state.requests.findIndex(r=>r.id===id);
+  if(idx===-1) return;
+  const r = state.requests[idx];
+  r.status = 'approved';
+  state.students.push({id:'s'+Date.now(), name:r.name, email:r.email, username:r.username, courseIds:[]});
+  render();
+}
+function rejectRequest(id){
+  const r = state.requests.find(r=>r.id===id);
+  if(r) r.status='rejected';
+  render();
+}
+function addCourse(e){
+  e.preventDefault();
+  const title = e.target.courseTitle.value.trim();
+  if(!title) return;
+  state.courses.push({id:'c'+Date.now(), title, materials:[]});
+  e.target.reset();
+  render();
+}
+function addMaterial(e, courseId){
+  e.preventDefault();
+  const title = e.target.matTitle.value.trim();
+  const type = e.target.matType.value;
+  if(!title) return;
+  const course = state.courses.find(c=>c.id===courseId);
+  course.materials.push({type, title, meta: type==='video' ? 'Recording · view only' : 'Document · view only'});
+  e.target.reset();
+  render();
+}
+function assignCourse(studentId, courseId){
+  if(!courseId) return;
+  const s = state.students.find(s=>s.id===studentId);
+  if(!s.courseIds.includes(courseId)) s.courseIds.push(courseId);
+  render();
+}
+function unassignCourse(studentId, courseId){
+  const s = state.students.find(s=>s.id===studentId);
+  s.courseIds = s.courseIds.filter(id=>id!==courseId);
+  render();
+}
+function setAdminView(v){ state.adminView=v; render(); }
+function openViewer(material){ state.viewerOpen = material; render(); }
+function closeViewer(){ state.viewerOpen = null; render(); }
+
+/* ---------------- SHARED PIECES ---------------- */
+function contourSvg(){
+  return `<svg class="contour-fig" viewBox="0 0 480 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 210 C 60 130, 150 60, 250 70 C 350 80, 430 140, 420 220 C 410 300, 320 360, 230 350 C 140 340, 60 290, 60 210 Z" stroke="#16233A" stroke-width="1.1" opacity="0.85"/>
+    <path d="M95 210 C 95 150, 165 100, 245 108 C 325 116, 385 160, 378 220 C 371 280, 300 322, 228 315 C 156 308, 95 270, 95 210 Z" stroke="#16233A" stroke-width="1.1" opacity="0.7"/>
+    <path d="M130 210 C 130 168, 182 132, 240 138 C 298 144, 340 176, 335 218 C 330 260, 280 288, 226 283 C 172 278, 130 250, 130 210 Z" stroke="#16233A" stroke-width="1.1" opacity="0.55"/>
+    <path d="M165 210 C 165 184, 198 162, 236 166 C 274 170, 300 190, 296 216 C 292 242, 262 260, 224 257 C 186 254, 165 232, 165 210 Z" stroke="#8C3F30" stroke-width="1.2" opacity="0.9"/>
+    <circle cx="228" cy="212" r="4" fill="#8C3F30"/><circle cx="330" cy="120" r="3" fill="#9C7A3C"/><circle cx="90" cy="290" r="3" fill="#9C7A3C"/>
+  </svg>`;
+}
+
+function siteHeader(activeStudent){
+  return `
+  <header class="site">
+    <nav class="wrap">
+      <div class="brand">NXT Global Academy</div>
+      <div class="navlinks">
+        <a href="#" onclick="go('landing');return false;">Program</a>
+        <a href="#" onclick="go('landing');return false;">Success Stories</a>
+        <a href="#" onclick="go('register');return false;">How to Join</a>
+      </div>
+      <div style="display:flex; gap:12px;">
+        <a href="#" class="btn btn-outline" onclick="go('studentDashboard');return false;">Student Login</a>
+        <a href="#" class="btn" onclick="go('register');return false;">Request Access</a>
+      </div>
+    </nav>
+  </header>`;
+}
+
+function siteFooter(){
+  return `<footer class="site"><div class="wrap"><div>© 2026 NXT Global Academy</div><div>Contact · Student Login</div></div></footer>`;
+}
+
+/* ---------------- VIEWS ---------------- */
+function landingView(){
+  return `
+  ${siteHeader()}
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Learn to model catastrophe risk, and read the data behind it.</h1>
+        <p class="lede">A structured, mentor-led program in catastrophe modelling and data analytics — built for people moving into risk, reinsurance, and actuarial analytics roles.</p>
+        <div class="actions">
+          <a href="#" class="btn" onclick="go('register');return false;">Request Access</a>
+          <a href="#" class="btn btn-outline" onclick="go('studentDashboard');return false;">Preview Student Portal</a>
+        </div>
+        <div class="stat-row">
+          <div><strong>100</strong>seats per cohort</div>
+          <div><strong>Live + recorded</strong>sessions</div>
+          <div><strong>Admin-reviewed</strong>enrolment</div>
+        </div>
+      </div>
+      <div>${contourSvg()}</div>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>What the program covers</h2><p>Six modules from peril fundamentals to a final portfolio project.</p></div>
+      <div class="topic-list">
+        <div class="topic-row"><h3>Peril modelling fundamentals</h3><p>How hazard, exposure, and vulnerability combine into a loss estimate.</p></div>
+        <div class="topic-row"><h3>Statistical & data analytics tools</h3><p>Python, SQL, and applied statistics for risk data at scale.</p></div>
+        <div class="topic-row"><h3>Portfolio risk aggregation</h3><p>Accumulation, correlation, and tail risk across a book of business.</p></div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>How to join</h2><p>Every submission is reviewed by the program team before access is granted.</p></div>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><h3>Fill in your details</h3><p>Name, DOB, phone, email, and an ID document.</p></div>
+        <div class="step"><div class="num">2</div><h3>Program team reviews it</h3><p>Every submission is checked by hand.</p></div>
+        <div class="step"><div class="num">3</div><h3>Get your login</h3><p>Set up your account and start your course.</p></div>
+      </div>
+    </div>
+  </section>
+  ${siteFooter()}
+  `;
+}
+
+function registerView(){
+  return `
+  ${siteHeader()}
+  <div class="form-page wrap">
+    <div class="form-card">
+      <h2>Request access</h2>
+      <p class="sub">Fill in your details below. Your account activates once the program team approves your request.</p>
+      ${state.formError ? `<div class="form-msg error">${state.formError}</div>` : ''}
+      <form onsubmit="submitRegistration(event)">
+        <div class="field"><label>Full name</label><input name="name" required></div>
+        <div class="two-col">
+          <div class="field"><label>Date of birth</label><input type="date" name="dob" required></div>
+          <div class="field"><label>Phone number</label><input type="tel" name="phone" required></div>
+        </div>
+        <div class="field"><label>Email address</label><input type="email" name="email" required></div>
+        <div class="two-col">
+          <div class="field"><label>Choose a username</label><input name="username" required></div>
+          <div class="field"><label>Choose a password</label><input type="password" name="password" required></div>
+        </div>
+        <div class="field">
+          <label>Aadhaar card (for verification)</label>
+          <div class="upload-box">
+            Upload a clear photo or scan — masked/last-4-digits version preferred.
+            <br><input type="file" name="aadhaar">
+          </div>
+          <div class="field-hint">Handled by the program admin for verification only.</div>
+        </div>
+        <button type="submit" class="btn" style="width:100%; margin-top:8px;">Request Login</button>
+      </form>
+    </div>
+  </div>
+  ${siteFooter()}
+  `;
+}
+
+function confirmationView(){
+  return `
+  ${siteHeader()}
+  <div class="wrap">
+    <div class="confirm-box">
+      <div class="badge">Pending review</div>
+      <h2>Request submitted</h2>
+      <p style="color:var(--slate); margin-top:12px;">The program admin has been notified. You'll get an email once your account is approved — usually within a couple of days.</p>
+      <a href="#" class="btn" style="margin-top:24px;" onclick="go('landing');return false;">Back to homepage</a>
+    </div>
+  </div>
+  ${siteFooter()}
+  `;
+}
+
+/* ---- STUDENT DASHBOARD ---- */
+function studentDashboardView(){
+  const student = state.students.find(s=>s.id===state.currentStudentId) || state.students[0];
+  const myCourses = state.courses.filter(c=>student.courseIds.includes(c.id));
+  const nav = ['dashboard','courses','profile'];
+  return `
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">NXT Global<br>Academy</div>
+      <ul class="navlist">
+        <li><button class="navbtn ${state.studentView==='dashboard'?'active':''}" onclick="state.studentView='dashboard';render()">▦ Dashboard</button></li>
+        <li><button class="navbtn ${state.studentView==='courses'?'active':''}" onclick="state.studentView='courses';render()">▤ My Courses</button></li>
+        <li><button class="navbtn" onclick="go('landing')">↩ Back to site</button></li>
+      </ul>
+    </aside>
+    <main class="dash">
+      <div class="topbar">
+        <div class="greeting"><h1>Hi, ${student.name.split(' ')[0]} 👋</h1><p>${student.email}</p></div>
+        <span class="status-pill">Access approved</span>
+      </div>
+      <div class="block">
+        <div class="block-head"><h2>Your courses</h2><span>${myCourses.length} enrolled</span></div>
+        <div class="course-grid">
+          ${myCourses.length ? myCourses.map(c=>`
+            <div class="course-card">
+              <div class="course-cover"><span>${c.materials.length} items · Live + Recorded</span></div>
+              <div class="course-body">
+                <div class="tag">In progress</div>
+                <h3>${c.title}</h3>
+              </div>
+            </div>
+          `).join('') : `<p style="color:var(--slate);">No courses assigned yet — the program admin will assign your courses shortly.</p>`}
+        </div>
+      </div>
+      ${myCourses.map(c=>`
+        <div class="block">
+          <div class="block-head"><h2>${c.title} — Materials</h2><span>${c.materials.length} items</span></div>
+          <div class="resource-list">
+            ${c.materials.length ? c.materials.map(m=>`
+              <div class="resource-row">
+                <div>
+                  <div class="resource-title">${m.type==='video'?'▶':'▤'} ${m.title}</div>
+                  <div class="resource-meta">${m.meta}</div>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                  <span class="view-badge">${m.type==='video'?'Stream only':'Read only'}</span>
+                  <button class="btn btn-outline btn-sm" onclick='openViewer(${JSON.stringify(m)})'>Open</button>
+                </div>
+              </div>
+            `).join('') : `<p style="color:var(--slate); padding:14px 0;">No materials uploaded yet.</p>`}
+          </div>
+        </div>
+      `).join('')}
+    </main>
+  </div>
+  ${viewerModal()}
+  `;
+}
+
+function viewerModal(){
+  if(!state.viewerOpen) return '';
+  const m = state.viewerOpen;
+  return `
+  <div class="viewer-modal">
+    <div class="viewer-box no-copy" oncontextmenu="return false;">
+      <div class="vh"><strong>${m.title}</strong><button class="close-x" onclick="closeViewer()">✕</button></div>
+      <div class="vbody">
+        <div class="icon">${m.type==='video'?'▶':'▤'}</div>
+        <p>This is a view-only preview.${m.type==='video'?' In the real portal, this streams from a protected video host with no download link.':' In the real portal, this renders as an in-browser document viewer with downloading disabled.'}</p>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---- ADMIN DASHBOARD ---- */
+function adminDashboardView(){
+  return `
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">NXT Global<br>Academy — Admin</div>
+      <ul class="navlist">
+        <li><button class="navbtn ${state.adminView==='requests'?'active':''}" onclick="setAdminView('requests')">▤ Access Requests</button></li>
+        <li><button class="navbtn ${state.adminView==='students'?'active':''}" onclick="setAdminView('students')">▥ Students</button></li>
+        <li><button class="navbtn ${state.adminView==='courses'?'active':''}" onclick="setAdminView('courses')">▦ Courses & Materials</button></li>
+        <li><button class="navbtn" onclick="go('landing')">↩ Back to site</button></li>
+      </ul>
+    </aside>
+    <main class="dash">
+      ${state.adminView==='requests' ? adminRequestsPanel() : ''}
+      ${state.adminView==='students' ? adminStudentsPanel() : ''}
+      ${state.adminView==='courses' ? adminCoursesPanel() : ''}
+    </main>
+  </div>
+  `;
+}
+
+function adminRequestsPanel(){
+  const pending = state.requests.filter(r=>r.status==='pending');
+  const other = state.requests.filter(r=>r.status!=='pending');
+  return `
+  <div class="topbar"><div class="greeting"><h1>Access requests</h1><p>${pending.length} awaiting review</p></div></div>
+  <div class="block">
+    <table class="admin-table">
+      <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Aadhaar</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        ${[...pending, ...other].map(r=>`
+          <tr>
+            <td>${r.name}</td><td>${r.email}</td><td>${r.phone}</td>
+            <td>${r.aadhaarFile}</td>
+            <td><span class="pill ${r.status}">${r.status}</span></td>
+            <td>
+              ${r.status==='pending' ? `
+                <button class="btn btn-sm" onclick="approveRequest('${r.id}')">Approve</button>
+                <button class="btn btn-danger btn-sm" onclick="rejectRequest('${r.id}')">Reject</button>
+              ` : ''}
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  </div>
+  `;
+}
+
+function adminStudentsPanel(){
+  return `
+  <div class="topbar"><div class="greeting"><h1>Students</h1><p>${state.students.length} of 100 seats used</p></div></div>
+  <div class="block">
+    <table class="admin-table">
+      <thead><tr><th>Name</th><th>Email</th><th>Assigned courses</th><th>Assign a course</th></tr></thead>
+      <tbody>
+        ${state.students.map(s=>`
+          <tr>
+            <td>${s.name}</td><td>${s.email}</td>
+            <td>${s.courseIds.map(cid=>{
+              const c = state.courses.find(c=>c.id===cid);
+              return c ? `<span class="pill approved" style="margin-right:6px;">${c.title} <a href="#" onclick="unassignCourse('${s.id}','${c.id}');return false;" style="margin-left:6px;">✕</a></span>` : '';
+            }).join('') || '<span style="color:var(--slate);">None yet</span>'}</td>
+            <td>
+              <select onchange="assignCourse('${s.id}', this.value); this.value='';">
+                <option value="">Select course…</option>
+                ${state.courses.filter(c=>!s.courseIds.includes(c.id)).map(c=>`<option value="${c.id}">${c.title}</option>`).join('')}
+              </select>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  </div>
+  `;
+}
+
+function adminCoursesPanel(){
+  return `
+  <div class="topbar"><div class="greeting"><h1>Courses & materials</h1><p>${state.courses.length} courses</p></div></div>
+  <div class="block">
+    <form class="inline-form" onsubmit="addCourse(event)">
+      <div class="field"><label>New course title</label><input name="courseTitle" placeholder="e.g. Portfolio Risk Aggregation" required></div>
+      <button class="btn btn-sm" type="submit">Add course</button>
+    </form>
+    ${state.courses.map(c=>`
+      <div class="block" style="border:1px solid var(--line); padding:20px; background:#fff;">
+        <div class="block-head"><h2>${c.title}</h2><span>${c.materials.length} items</span></div>
+        <div class="resource-list" style="margin-bottom:16px;">
+          ${c.materials.map(m=>`
+            <div class="resource-row">
+              <div><div class="resource-title">${m.title}</div><div class="resource-meta">${m.meta}</div></div>
+              <span class="view-badge">${m.type==='video'?'Stream only':'Read only'}</span>
+            </div>
+          `).join('') || `<p style="color:var(--slate); padding:10px 0;">No materials yet.</p>`}
+        </div>
+        <form class="inline-form" style="margin-bottom:0;" onsubmit="addMaterial(event,'${c.id}')">
+          <div class="field"><label>Material title</label><input name="matTitle" placeholder="e.g. Session 3 — Loss Curves" required></div>
+          <div class="field">
+            <label>Type</label>
+            <select name="matType"><option value="video">Recording</option><option value="pdf">Document</option></select>
+          </div>
+          <button class="btn btn-sm" type="submit">Add material</button>
+        </form>
+      </div>
+    `).join('')}
+  </div>
+  `;
+}
+
+function renderView(){
+  switch(state.view){
+    case 'landing': return landingView();
+    case 'register': return registerView();
+    case 'confirmation': return confirmationView();
+    case 'studentDashboard': return studentDashboardView();
+    case 'adminDashboard': return adminDashboardView();
+    default: return landingView();
+  }
+}
+
+render();
+</script>
+</body>
+</html>
